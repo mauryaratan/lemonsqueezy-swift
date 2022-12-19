@@ -56,24 +56,21 @@ internal enum HTTPMethod: String {
   case GET, POST, DELETE, PUT
 }
 
-public struct LemonSqueezyAPIDataAndIncluded<Resource: Codable, Included: Codable>: Codable {
-    /// The requested object(s)
-    public let data: Resource
-    
-    public let included: Included?
-    
-    /// Any errors associated with the request
-    public let errors: [LemonSqueezyAPIError]?
-}
-
 extension LemonSqueezy {
     internal enum APIRoute {
         case me
+        
+        case orders
+        case order(_ orderId: Order.ID)
         
         var resolvedPath: (path: String, queryItems: [URLQueryItem]?) {
             switch self {
             case .me:
                 return (path: "/v1/users/me", queryItems: nil)
+            case .order(let id):
+              return (path: "/v1/orders/\(id)", queryItems: nil)
+            case .orders:
+              return (path: "/v1/orders", queryItems: nil)
             }
         }
     }
@@ -86,5 +83,44 @@ extension LemonSqueezy {
         }
         
         return result
+    }
+}
+
+public struct LemonSqueezyAPIDataAndIncluded<Resource: Codable, Included: Codable>: Codable {
+    /// The requested object(s)
+    public let data: Resource
+    
+    /// Related resources that can be included in the same response by usnig the `include` query parameter.
+    public let included: Included?
+    
+    /// Any errors associated with the request
+    public let errors: [LemonSqueezyAPIError]?
+}
+
+public struct LemonSqueezyAPIDataIncludedAndMeta<Resource: Codable, Included: Codable, Meta: Codable>: Codable {
+    /// The requested object(s)
+    public let data: Resource
+    
+    /// An object containing pagination information for paginated requests
+    public let meta: Meta?
+    
+    /// Related resources that can be included in the same response by usnig the `include` query parameter.
+    public let included: Included?
+    
+    /// Any errors associated with the request
+    public let errors: [LemonSqueezyAPIError]?
+}
+
+/// An object containing pagination information for paginated requests
+public struct Meta: Codable {
+    public let page: Page
+    
+    public struct Page: Codable {
+        public let currentPage: Int
+        public let from: Int
+        public let lastPage: Int
+        public let perPage: Int
+        public let to: Int
+        public let total: Int
     }
 }

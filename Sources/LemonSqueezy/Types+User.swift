@@ -19,7 +19,7 @@ extension User {
     }
     
     /// An object representing the resources data.
-    public struct Attributes: Codable, Hashable {
+    public struct Attributes: Codable {
         /// The name of the user.
         public let name: String
         
@@ -35,10 +35,10 @@ extension User {
         /// Has the value `true` if the user has uploaded a custom avatar image.
         public let hasCustomAvatar: Bool
         
-        /// An ISO-8601 formatted date-time string indicating when the object was created.
+        /// An [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) formatted date-time string indicating when the object was created.
         public let createdAt: String
         
-        /// An ISO-8601 formatted date-time string indicating when the object was last updated.
+        /// An [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) formatted date-time string indicating when the object was last updated.
         public let updatedAt: String
     }
 }
