@@ -11,6 +11,9 @@ extension LemonSqueezy {
     }
     
     /// Returns a list of orders.
+    /// - Parameters:
+    ///    - pageNumber: The page number to return the response for.
+    ///    - pageSize: The number of resources to return per-page.
     /// - Returns: A response object containing an array of ``Order``.
     public func getOrders(pageNumber: Int = 1, pageSize: Int = 10) async throws -> LemonSqueezyAPIDataIncludedAndMeta<[Order], Order.Included, Meta> {
         return try await call(route: .orders, queryItems: [], pageNumber: pageNumber, pageSize: pageSize)

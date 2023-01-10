@@ -18,7 +18,7 @@ public struct Order: Codable, Identifiable {
 
 extension Order {
     public struct APIResponse: Codable {
-        let data: User
+        let data: Order
     }
     
     /// An object representing the resources data.
