@@ -76,6 +76,9 @@ extension LemonSqueezy {
         case products
         case product(_ productId: Product.ID)
         
+        case variants
+        case variant(_ variantId: Variant.ID)
+        
         var resolvedPath: (path: String, queryItems: [URLQueryItem]?) {
             switch self {
             case .me:
@@ -92,6 +95,10 @@ extension LemonSqueezy {
                 return (path: "/v1/products", queryItems: nil)
             case .product(let id):
                 return (path: "/v1/products/\(id)", queryItems: nil)
+            case .variants:
+                return (path: "/v1/variants", queryItems: nil)
+            case .variant(let id):
+                return (path: "/v1/variants/\(id)", queryItems: nil)
             }
         }
     }
