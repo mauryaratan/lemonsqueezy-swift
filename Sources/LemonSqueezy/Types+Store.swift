@@ -72,7 +72,7 @@ extension Store {
 }
 
 extension Store {
-    /// Related resources that can be included in the same response by usnig the `include` query parameter.
+    /// Related resources that can be included in the same response by using the `include` query parameter.
     public struct Included: Codable {
         
     }

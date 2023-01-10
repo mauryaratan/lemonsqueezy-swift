@@ -111,7 +111,7 @@ public struct LemonSqueezyAPIDataAndIncluded<Resource: Codable, Included: Codabl
     /// The requested object(s)
     public let data: Resource
     
-    /// Related resources that can be included in the same response by usnig the `include` query parameter.
+    /// Related resources that can be included in the same response by using the `include` query parameter.
     public let included: Included?
     
     /// Any errors associated with the request
@@ -125,7 +125,7 @@ public struct LemonSqueezyAPIDataIncludedAndMeta<Resource: Codable, Included: Co
     /// An object containing pagination information for paginated requests
     public let meta: Meta?
     
-    /// Related resources that can be included in the same response by usnig the `include` query parameter.
+    /// Related resources that can be included in the same response by using the `include` query parameter.
     public let included: Included?
     
     /// Any errors associated with the request
