@@ -5,9 +5,11 @@ extension LemonSqueezy {
         route: APIRoute,
         method: HTTPMethod = .GET,
         queryItems: [URLQueryItem] = [],
+        pageNumber: Int? = nil,
+        pageSize: Int = 10,
         body: Data? = nil
     ) async throws -> T {
-        let url = getURL(for: route, queryItems: queryItems)
+        let url = getURL(for: route, queryItems: queryItems, pageNumber: pageNumber, pageSize: pageSize)
         var request = URLRequest(url: url)
         if let body {
             request.httpBody = body
@@ -22,8 +24,13 @@ extension LemonSqueezy {
 }
 
 extension LemonSqueezy {
-    internal func getURL(for route: APIRoute, queryItems: [URLQueryItem] = []) -> URL {
+    internal func getURL(for route: APIRoute, queryItems: [URLQueryItem] = [], pageNumber: Int?, pageSize: Int) -> URL {
         var combinedQueryItems: [URLQueryItem] = []
+        
+        if (pageNumber != nil) {
+            combinedQueryItems.append(URLQueryItem(name: "page[size]", value: String(pageSize)))
+            combinedQueryItems.append(URLQueryItem(name: "page[number]", value: String(pageNumber!)))
+        }
         
         combinedQueryItems.append(contentsOf: queryItems)
         
@@ -63,6 +70,9 @@ extension LemonSqueezy {
         case orders
         case order(_ orderId: Order.ID)
         
+        case stores
+        case store(_ storeId: Store.ID)
+        
         var resolvedPath: (path: String, queryItems: [URLQueryItem]?) {
             switch self {
             case .me:
@@ -71,6 +81,10 @@ extension LemonSqueezy {
               return (path: "/v1/orders/\(id)", queryItems: nil)
             case .orders:
               return (path: "/v1/orders", queryItems: nil)
+            case .stores:
+              return (path: "/v1/stores", queryItems: nil)
+            case .store(let id):
+              return (path: "/v1/stores/\(id)", queryItems: nil)
             }
         }
     }

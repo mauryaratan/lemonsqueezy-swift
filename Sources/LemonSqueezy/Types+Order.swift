@@ -110,9 +110,6 @@ extension Order {
     
     /// An object containing first order item from the order.
     public struct FirstOrderItem: Codable {
-        /// The ID of the order item.
-        public let id: Int
-        
         /// The ID of the order.
         public let orderId: Int
         
@@ -127,7 +124,6 @@ extension Order {
         
         /// The name of the product variant.
         public let variantName: String
-        
         
         /// A positive integer in cents representing the price of the order item in the order currency.
         public let price: Int
