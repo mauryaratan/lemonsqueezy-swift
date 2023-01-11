@@ -21,25 +21,28 @@ extension LemonSqueezyError: LocalizedError {
 
 /// An error returned from Lemon Squeezy API
 public struct LemonSqueezyAPIError: Codable, Hashable {
+    public let errors: [ErrorDetail]?
+}
+
+public struct ErrorDetail: Codable, Hashable {
     /// The summary of the encountered error
     public let title: String
     
     /// The details for the encountered error
     public let detail: String
     
-    public let errors: [ErrorDetail]?
-}
-
-public struct ErrorDetail: Codable, Hashable {
-  public let message: String?
+    public let status: String
+    
+    public var message: String { title }
 }
 
 extension LemonSqueezyAPIError: LocalizedError {
   /// The human-readable description for the error
-  public var errorDescription: String? {
-    """
-Error: \(title)
-Details: \(detail)
+    public var errorDescription: String? {
+        """
+Error: \(errors?.first?.title ?? "Unknown")
+Detail: \(errors?.first?.detail ?? "Unknown")
+Status: \(errors?.first?.status ?? "Unknown")
 """
-  }
+    }
 }
