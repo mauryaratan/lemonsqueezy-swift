@@ -96,6 +96,9 @@ extension LemonSqueezy {
         case licenseKeyInstances
         case licenseKeyInstance(_ licenseKeyInstanceId: LicenseKeyInstance.ID)
         
+        case checkouts
+        case checkout(_ checkoutId: Checkout.ID)
+        
         var resolvedPath: (path: String, queryItems: [URLQueryItem]?) {
             switch self {
             case .me:
@@ -140,6 +143,10 @@ extension LemonSqueezy {
                 return (path: "/v1/license-key-instances", queryItems: nil)
             case .licenseKeyInstance(let id):
                 return (path: "/v1/license-key-instances/\(id)", queryItems: nil)
+            case .checkouts:
+                return (path: "/v1/checkouts", queryItems: nil)
+            case .checkout(let id):
+                return (path: "/v1/checkouts/\(id)", queryItems: nil)
             }
         }
     }
