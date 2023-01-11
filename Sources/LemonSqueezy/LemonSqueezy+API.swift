@@ -13,7 +13,6 @@ extension LemonSqueezy {
         var request = URLRequest(url: url)
         if let body {
             request.httpBody = body
-            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         }
         
         signURLRequest(method: method, body: body, request: &request)
@@ -60,7 +59,7 @@ extension LemonSqueezy {
 }
 
 internal enum HTTPMethod: String {
-  case GET, POST, DELETE, PUT
+  case GET, POST, DELETE, PUT, PATCH
 }
 
 extension LemonSqueezy {
@@ -84,6 +83,9 @@ extension LemonSqueezy {
         
         case orderItems
         case orderItem(_ orderItemId: OrderItem.ID)
+        
+        case subscriptions
+        case subscription(_ subscriptionId: Subscription.ID)
         
         var resolvedPath: (path: String, queryItems: [URLQueryItem]?) {
             switch self {
@@ -113,6 +115,10 @@ extension LemonSqueezy {
                 return (path: "/v1/order-items", queryItems: nil)
             case .orderItem(let id):
                 return (path: "/v1/order-items/\(id)", queryItems: nil)
+            case .subscriptions:
+                return (path: "/v1/subscriptions", queryItems: nil)
+            case .subscription(let id):
+                return (path: "/v1/subscriptions/\(id)", queryItems: nil)
             }
         }
     }
