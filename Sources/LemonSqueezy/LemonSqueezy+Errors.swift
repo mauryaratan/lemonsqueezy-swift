@@ -1,6 +1,6 @@
 import Foundation
 
-/// The error types relating to Twift instances and methods.
+/// The error types relating to Lemon Squeezy instances and methods.
 public enum LemonSqueezyError: Error {
     /// This error is thrown only when no other error type adequately matches encountered problem.
     case UnknownError(_ context: Any? = nil)
