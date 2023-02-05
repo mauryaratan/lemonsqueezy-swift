@@ -1,0 +1,24 @@
+name: Build Documentation & Generate Reports
+
+on: [push, workflow_dispatch]
+
+jobs:
+  build-documentation:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Generate Documentation
+        uses: SwiftDocOrg/swift-doc@master
+        with:
+          inputs: "Sources"
+          module-name: "Lemon Squeezy"
+          output: "Documentation"
+      - name: Upload Documentation to Wiki
+        # Only run on the main branch
+        if: github.ref == 'refs/heads/main'
+        uses: SwiftDocOrg/github-wiki-publish-action@v1
+        with:
+          path: "Documentation"
+        env:
+          GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
