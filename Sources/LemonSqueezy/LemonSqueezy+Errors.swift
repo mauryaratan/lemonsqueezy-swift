@@ -22,6 +22,7 @@ extension LemonSqueezyError: LocalizedError {
 /// An error returned from Lemon Squeezy API
 public struct LemonSqueezyAPIError: Codable, Hashable {
     public let errors: [ErrorDetail]?
+    public let error: String?
 }
 
 public struct ErrorDetail: Codable, Hashable {
