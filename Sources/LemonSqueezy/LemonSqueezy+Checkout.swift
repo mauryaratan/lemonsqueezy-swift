@@ -12,9 +12,10 @@ extension LemonSqueezy {
     ///
     /// - Parameters:
     ///    - checkoutId: The ID of the checkout you'd like to retrieve.
+    ///    - queryItems: An array of `URLQueryItem`, passed as query parameters.
     /// - Returns: A response object containing the requested ``Checkout``.
-    public func getCheckout(_ checkoutId: Checkout.ID) async throws -> LemonSqueezyAPIDataAndIncluded<Checkout, Checkout.Included> {
-        return try await call(route: .checkout(checkoutId), queryItems: [])
+    public func getCheckout(_ checkoutId: Checkout.ID, queryItems: [URLQueryItem] = []) async throws -> LemonSqueezyAPIDataAndIncluded<Checkout, Checkout.Included> {
+        return try await call(route: .checkout(checkoutId), queryItems: queryItems)
     }
     
     /// Create a checkout.
@@ -31,8 +32,9 @@ extension LemonSqueezy {
     /// - Parameters:
     ///    - pageNumber: The page number to return the response for.
     ///    - pageSize: The number of resources to return per-page.
+    ///    - queryItems: An array of `URLQueryItem`, passed as query parameters.
     /// - Returns: A response object containing an array of ``Checkout``.1
-    public func getCheckouts(pageNumber: Int = 1, pageSize: Int = 10) async throws -> LemonSqueezyAPIDataIncludedAndMeta<[Checkout], Checkout.Included, Meta> {
-        return try await call(route: .checkouts, queryItems: [], pageNumber: pageNumber, pageSize: pageSize)
+    public func getCheckouts(pageNumber: Int = 1, pageSize: Int = 10, queryItems: [URLQueryItem] = []) async throws -> LemonSqueezyAPIDataIncludedAndMeta<[Checkout], Checkout.Included, Meta> {
+        return try await call(route: .checkouts, queryItems: queryItems, pageNumber: pageNumber, pageSize: pageSize)
     }
 }
