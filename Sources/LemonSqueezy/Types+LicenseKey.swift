@@ -29,6 +29,9 @@ extension LicenseKey {
     public struct Attributes: Codable {
         /// The ID of the store this license key belongs to.
         public let storeId: Int
+        
+        /// The ID of the customer this subscription belongs to.
+        public let customerId: Int
 
         /// The ID of the order associated with this license key.
         public let orderId: Int

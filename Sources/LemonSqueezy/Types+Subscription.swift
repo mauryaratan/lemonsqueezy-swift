@@ -30,6 +30,9 @@ extension Subscription {
     public struct Attributes: Codable {
         /// The ID of the store this subscription belongs to.
         public let storeId: Int
+        
+        /// The ID of the customer this subscription belongs to.
+        public let customerId: Int
 
         /// The ID of the order associated with this subscription.
         public let orderId: Int

@@ -26,6 +26,9 @@ extension Order {
         /// The ID of the store this order belongs to.
         public let storeId: Int
         
+        /// The ID of the customer this subscription belongs to.
+        public let customerId: Int
+        
         /// The unique identifier (UUID) for this order.
         public let identifier: String
         
