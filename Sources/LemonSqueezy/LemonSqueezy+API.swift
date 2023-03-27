@@ -90,6 +90,9 @@ extension LemonSqueezy {
         case discounts
         case discount(_ discountId: Discount.ID)
         
+        case discountRedemptions
+        case discountRedemption(_ discountRedemptionId: DiscountRedemption.ID)
+        
         case licenseKeys
         case licenseKey(_ licenseKeyId: LicenseKey.ID)
         
@@ -139,6 +142,10 @@ extension LemonSqueezy {
                 return (path: "/v1/discounts", queryItems: nil)
             case .discount(let id):
                 return (path: "/v1/discounts/\(id)", queryItems: nil)
+            case .discountRedemptions:
+                return (path: "/v1/discount-redemptions", queryItems: nil)
+            case .discountRedemption(let id):
+                return (path: "/v1/discount-redemptions/\(id)", queryItems: nil)
             case .licenseKeys:
                 return (path: "/v1/license-keys", queryItems: nil)
             case .licenseKey(let id):
