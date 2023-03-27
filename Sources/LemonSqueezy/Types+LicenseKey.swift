@@ -44,6 +44,9 @@ extension LicenseKey {
 
         /// The email address of the customer.
         public let userEmail: String
+        
+        /// The full license key.
+        public let key: String
 
         /// A “short” representation of the license key, made up of the string “XXXX-” followed by the last 12 characters of the license key.
         public let keyShort: String
