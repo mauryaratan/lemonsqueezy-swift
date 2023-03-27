@@ -60,6 +60,12 @@ extension Subscription {
 
         /// The formatted status of the subscription.
         public let statusFormatted: String
+        
+        /// Lowercase brand of the card used to pay for the latest subscription payment. One of `visa`, `mastercard`, `american_express`, `discover`, `jcb`, `diners_club`. Will be empty for non-card payments.
+        public let cardBrand: String
+        
+        /// The last 4 digits of the card used to pay for the latest subscription payment. Will be empty for non-card payments.
+        public let cardLastFour: String
 
         /// An object containing the payment collection pause behaviour options for the subscription.
         public let pause: Pause?
