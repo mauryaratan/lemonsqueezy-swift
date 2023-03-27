@@ -106,6 +106,9 @@ extension LemonSqueezy {
         case validateLicense
         case deactivateLicense
         
+        case customers
+        case customer(_ customerId: Customer.ID)
+        
         var resolvedPath: (path: String, queryItems: [URLQueryItem]?) {
             switch self {
             case .me:
@@ -164,6 +167,10 @@ extension LemonSqueezy {
                 return (path: "/v1/licenses/validate", queryItems: nil)
             case .deactivateLicense:
                 return (path: "/v1/licenses/deactivate", queryItems: nil)
+            case .customers:
+                return (path: "/v1/customers", queryItems: nil)
+            case .customer(let id):
+                return (path: "/v1/customers/\(id)", queryItems: nil)
             }
         }
     }
