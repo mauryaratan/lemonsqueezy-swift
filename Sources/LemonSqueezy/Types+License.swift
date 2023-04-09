@@ -22,6 +22,7 @@ public struct ActivateLicense: Codable {
         public let activationUsage: Int
         public let createdAt: String
         public let expiresAt: String?
+        public let testMode: Bool?
     }
     
     public struct Instance: Codable {
@@ -59,6 +60,7 @@ public struct ValidateLicense: Codable {
         public let activationUsage: Int
         public let createdAt: String
         public let expiresAt: String?
+        public let testMode: Bool?
     }
     
     public struct Instance: Codable {
@@ -95,6 +97,7 @@ public struct DeactivateLicense: Codable {
         public let activationUsage: Int
         public let createdAt: String
         public let expiresAt: String?
+        public let testMode: Bool?
     }
     
     public struct Meta: Codable {
