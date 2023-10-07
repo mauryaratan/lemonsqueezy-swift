@@ -118,6 +118,9 @@ extension LemonSqueezy {
         
         case prices
         case price(_ priceId: Price.ID)
+        
+        case usageRecords
+        case usageRecord(_ usageRecordId: UsageRecord.ID)
 
         var resolvedPath: (path: String, queryItems: [URLQueryItem]?) {
             switch self {
@@ -195,6 +198,10 @@ extension LemonSqueezy {
                 return (path: "/v1/prices", queryItems: nil)
             case .price(let id):
                 return (path: "/v1/prices/\(id)", queryItems: nil)
+            case .usageRecords:
+                return (path: "/v1/usage-records", queryItems: nil)
+            case .usageRecord(let id):
+                return (path: "/v1/usage-records/\(id)", queryItems: nil)
             }
         }
     }
