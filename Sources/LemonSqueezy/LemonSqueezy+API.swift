@@ -121,6 +121,9 @@ extension LemonSqueezy {
         
         case usageRecords
         case usageRecord(_ usageRecordId: UsageRecord.ID)
+        
+        case webhooks
+        case webhook(_ webhookId: Webhook.ID)
 
         var resolvedPath: (path: String, queryItems: [URLQueryItem]?) {
             switch self {
@@ -202,6 +205,10 @@ extension LemonSqueezy {
                 return (path: "/v1/usage-records", queryItems: nil)
             case .usageRecord(let id):
                 return (path: "/v1/usage-records/\(id)", queryItems: nil)
+            case .webhooks:
+                return (path: "/v1/webhooks", queryItems: nil)
+            case .webhook(let id):
+                return (path: "/v1/webhooks/\(id)", queryItems: nil)
             }
         }
     }
