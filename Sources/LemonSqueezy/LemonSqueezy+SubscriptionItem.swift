@@ -1,6 +1,6 @@
 //
 //  File.swift
-//  
+//
 //
 //  Created by Ram Ratan Maurya on 07/10/23.
 //
@@ -17,7 +17,21 @@ extension LemonSqueezy {
     public func getSubscriptionItem(_ subscriptionItemId: SubscriptionItem.ID, queryItems: [URLQueryItem] = []) async throws -> LemonSqueezyAPIDataAndIncluded<SubscriptionItem, SubscriptionItem.Included> {
         return try await call(route: .subscriptionItem(subscriptionItemId), queryItems: queryItems)
     }
-    
+
+    public func updateSubscriptionItem(
+        _ subscriptionItemId: SubscriptionItem.ID,
+        body: [String: Any]
+    ) async throws -> LemonSqueezyAPIDataAndIncluded<SubscriptionItem, SubscriptionItem.Included> {
+        let serializedBody = try JSONSerialization.data(withJSONObject: body)
+        return try await call(route: .subscriptionItem(subscriptionItemId), method: .PATCH, queryItems: [], body: serializedBody)
+    }
+
+    public func getSubscriptionItemCurrentUsage(
+        _ subscriptionItemId: SubscriptionItem.ID
+    ) async throws -> LemonSqueezyAPIMeta<SubscriptionItem.Meta> {
+        return try await call(route: .subscriptionItemCurrentUsage(subscriptionItemId), method: .GET)
+    }
+
     /// Returns a list of subscriptions items.
     /// - Parameters:
     ///    - pageNumber: The page number to return the response for.
