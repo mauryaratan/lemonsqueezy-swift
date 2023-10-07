@@ -11,7 +11,7 @@ extension LemonSqueezy {
     /// Get a single subscription invoice by ID.
     ///
     /// - Parameters:
-    ///    - subscriptionId: The ID of the subscription you'd like to retrieve.
+    ///    - subscriptionId: The ID of the subscription invoice you'd like to retrieve.
     ///    - queryItems: An array of `URLQueryItem`, passed as query parameters.
     /// - Returns: A response object containing the requested ``SubscriptionInvoice``.
     public func getSubscriptionInvoice(_ subscriptionInvoiceId: SubscriptionInvoice.ID, queryItems: [URLQueryItem] = []) async throws -> LemonSqueezyAPIDataAndIncluded<SubscriptionInvoice, SubscriptionInvoice.Included> {
@@ -23,7 +23,7 @@ extension LemonSqueezy {
     ///    - pageNumber: The page number to return the response for.
     ///    - pageSize: The number of resources to return per-page.
     ///    - queryItems: An array of `URLQueryItem`, passed as query parameters.
-    /// - Returns: A response object containing an array of ``Subscription``.
+    /// - Returns: A response object containing an array of ``SubscriptionInvoice``.
     public func getSubscriptionInvoices(pageNumber: Int = 1, pageSize: Int = 10, queryItems: [URLQueryItem] = []) async throws -> LemonSqueezyAPIDataIncludedAndMeta<[SubscriptionInvoice], SubscriptionInvoice.Included, Meta> {
         return try await call(route: .subscriptionInvoices, queryItems: queryItems, pageNumber: pageNumber, pageSize: pageSize)
     }
