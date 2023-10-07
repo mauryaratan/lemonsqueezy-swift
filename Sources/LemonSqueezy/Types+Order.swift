@@ -27,19 +27,19 @@ extension Order {
         public let storeId: Int
         
         /// The ID of the customer this subscription belongs to.
-        public let customerId: Int
+        public let customerId: Int?
         
         /// The unique identifier (UUID) for this order.
         public let identifier: String
         
         /// An integer representing the sequential order number for this store.
         public let orderNumber: Int
-        
+
         /// The full name of the customers.
-        public let userName: String
+        public let userName: String?
         
         /// The email address of the customer.
-        public let userEmail: String
+        public let userEmail: String?
         
         /// The [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217) currency code for the order (e.g. `USD`, `GBP` etc.).
         public let currency: String
@@ -84,7 +84,7 @@ extension Order {
         public let statusFormatted: String
         
         /// Has the value true if the order has been refunded.
-        public let refunded: Int
+        public let refunded: Bool
         
         /// If the order has been refunded, this will be an [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) formatted date-time string indicating when the order was refunded.
         public let refundedAt: String?
@@ -102,7 +102,10 @@ extension Order {
         public let totalFormatted: String
         
         /// An object representing the first [order item](https://docs.lemonsqueezy.com/api/order-items) belonging to this order.
-        public let firstOrderItem: FirstOrderItem
+        //public let firstOrderItem: FirstOrderItem
+        
+        /// An object of customer-facing URLs for this order.
+        public let urls: Urls
         
         /// An [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) formatted date-time string indicating when the object was created.
         public let createdAt: String
@@ -136,6 +139,11 @@ extension Order {
         
         /// An [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) formatted date-time string indicating when the object was last updated.
         public let updatedAt: String
+    }
+    
+    public struct Urls: Codable {
+        /// A pre-signed URL for viewing the order in the customer's [My Orders](https://docs.lemonsqueezy.com/help/online-store/my-orders) page.
+        public let receipt: String
     }
 }
 
