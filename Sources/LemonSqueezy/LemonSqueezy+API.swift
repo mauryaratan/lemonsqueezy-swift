@@ -87,6 +87,9 @@ extension LemonSqueezy {
         case subscriptions
         case subscription(_ subscriptionId: Subscription.ID)
         
+        case subscriptionInvoices
+        case subscriptionInvoice(_ subscriptionInvoiceId: SubscriptionInvoice.ID)
+        
         case discounts
         case discount(_ discountId: Discount.ID)
         
@@ -141,6 +144,10 @@ extension LemonSqueezy {
                 return (path: "/v1/subscriptions", queryItems: nil)
             case .subscription(let id):
                 return (path: "/v1/subscriptions/\(id)", queryItems: nil)
+            case .subscriptionInvoices:
+                return (path: "/v1/subscription-invoices", queryItems: nil)
+            case .subscriptionInvoice(let id):
+                return (path: "/v1/subscription-invoices/\(id)", queryItems: nil)
             case .discounts:
                 return (path: "/v1/discounts", queryItems: nil)
             case .discount(let id):
