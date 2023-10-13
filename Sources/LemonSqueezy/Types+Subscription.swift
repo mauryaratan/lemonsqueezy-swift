@@ -64,7 +64,7 @@ extension Subscription {
         /// The formatted status of the subscription.
         public let statusFormatted: String
         
-        /// Lowercase brand of the card used to pay for the latest subscription payment. One of `visa`, `mastercard`, `american_express`, `discover`, `jcb`, `diners_club`. Will be empty for non-card payments.
+        /// Lowercase brand of the card used to pay for the latest subscription payment. One of `visa`, `mastercard`, `amex`, `discover`, `jcb`, `diners`, `unionpay`. Will be empty for non-card payments.
         public let cardBrand: String
         
         /// The last 4 digits of the card used to pay for the latest subscription payment. Will be empty for non-card payments.
@@ -81,6 +81,9 @@ extension Subscription {
 
         /// An integer representing a day of the month (21 equals 21st day of the month). This is the day of which subscription invoice payments are collected.
         public let billingAnchor: Int
+        
+        /// An object representing the first [subscription item](https://docs.lemonsqueezy.com/api/subscription-items) belonging to this subscription.
+        public let firstSubscriptionItem: FirstSubscriptionItem
 
         /// An object of customer-facing URLs for managing the subscription.
         public let urls: Urls
@@ -111,9 +114,35 @@ extension Subscription {
         public let resumesAt: String?
     }
     
+    public struct FirstSubscriptionItem: Codable {
+        /// The ID of the subscription item.
+        public let id: Int
+        
+        /// The ID of the subscription.
+        public let subscriptionId: Int
+        
+        /// The ID of the price.
+        public let priceId: Int
+        
+        /// The quantity of the subscription item.
+        public let quantity: Int
+        
+        /// Where it's usage based subscription item.
+        public let isUsageBased: Bool
+        
+        /// An [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) formatted date-time string indicating when the object was created.
+        public let createdAt: String
+        
+        /// An [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) formatted date-time string indicating when the object was last updated.
+        public let updatedAt: String
+    }
+    
     public struct Urls: Codable {
         /// A pre-signed URL for managing payment and billing information for the subscription. This can be used in conjunction with [Lemon.js](https://docs.lemonsqueezy.com/help/lemonjs/what-is-lemonjs) to allow your customer to change their billing information from within your application. The URL is valid for 24 hours from time of request.
         public let updatePaymentMethod: String
+        
+        /// A pre-signed URL to the [Customer Portal](https://docs.lemonsqueezy.com/help/online-store/customer-portal), which allows customers to fully manage their subscriptions and billing information from within your application. The URL is valid for 24 hours from time of request.
+        public let customerPortal: String
     }
 }
 

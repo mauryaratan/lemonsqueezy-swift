@@ -40,7 +40,7 @@ extension Store {
         public let avatarUrl: String
         
         /// The current billing plan for the store (e.g. `fresh`, `sweet`).
-        public let plan: String
+        public let plan: String?
         
         /// The [ISO 3166-1](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) two-letter country code for the store (e.g. US, GB, etc).
         public let country: String

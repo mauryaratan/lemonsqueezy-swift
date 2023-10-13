@@ -69,7 +69,7 @@ extension LicenseKey {
         /// The formatted status of the license key.
         public let statusFormatted: String
 
-        /// An ISO-8601 formatted date-time string indicating when the license key expires. Can be `null` if the license key is perpetual.
+        /// An [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) formatted date-time string indicating when the license key expires. Can be `null` if the license key is perpetual.
         public let expiresAt: String?
 
         /// An [ISO-8601](https://en.wikipedia.org/wiki/ISO_8601) formatted date-time string indicating when the object was created.
