@@ -229,7 +229,7 @@ public struct LemonSqueezyAPIDataAndIncluded<Resource: Codable, Included: Codabl
     public let data: Resource
 
     /// Related resources that can be included in the same response by using the `include` query parameter.
-    public let included: Included?
+    public let included: [IncludedResource]?
 
     /// Any errors associated with the request
     public let errors: [LemonSqueezyAPIError]?
@@ -243,7 +243,7 @@ public struct LemonSqueezyAPIDataIncludedAndMeta<Resource: Codable, Included: Co
     public let meta: Meta?
 
     /// Related resources that can be included in the same response by using the `include` query parameter.
-    public let included: Included?
+    public let included: [IncludedResource]?
 
     /// Any errors associated with the request
     public let errors: [LemonSqueezyAPIError]?
@@ -254,6 +254,104 @@ public struct LemonSqueezyAPIMeta<Meta: Codable>: Codable {
 
     /// Any errors associated with the request
     public let errors: [LemonSqueezyAPIError]?
+}
+
+public struct IncludedResource: Codable, Identifiable {
+    public typealias ID = String
+    
+    public let id: ID
+    public let type: String
+    public let attributes: Codable
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case type
+        case attributes
+    }
+    
+    public init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        id = (try? values.decode(ID.self, forKey: .id)) ?? ""
+        type = (try? values.decode(String.self, forKey: .type)) ?? ""
+        
+        if let resource = try? Store(from: decoder) {
+            attributes = resource
+        } else if let resource = try? Order(from: decoder) {
+            attributes = resource
+        } else if let resource = try? OrderItem(from: decoder) {
+            attributes = resource
+        } else if let resource = try? Product(from: decoder) {
+            attributes = resource
+        } else if let resource = try? Customer(from: decoder) {
+            attributes = resource
+        } else if let resource = try? Subscription(from: decoder) {
+            attributes = resource
+        } else if let resource = try? SubscriptionItem(from: decoder) {
+            attributes = resource
+        } else if let resource = try? LicenseKey(from: decoder) {
+            attributes = resource
+        } else if let resource = try? LicenseKeyInstance(from: decoder) {
+            attributes = resource
+        } else if let resource = try? Discount(from: decoder) {
+            attributes = resource
+        } else if let resource = try? DiscountRedemption(from: decoder) {
+            attributes = resource
+        } else if let resource = try? File(from: decoder) {
+            attributes = resource
+        } else if let resource = try? Variant(from: decoder) {
+            attributes = resource
+        } else if let resource = try? Webhook(from: decoder) {
+            attributes = resource
+        } else if let resource = try? UsageRecord(from: decoder) {
+            attributes = resource
+        } else {
+            throw DecodingError.dataCorrupted(
+                DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Unable to decode resource.")
+            )
+        }
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        
+        if let resource = attributes as? Store {
+            try container.encode(resource)
+        } else if let resource = attributes as? Order {
+            try container.encode(resource)
+        } else if let resource = attributes as? OrderItem {
+            try container.encode(resource)
+        } else if let resource = attributes as? Product {
+            try container.encode(resource)
+        } else if let resource = attributes as? Customer {
+            try container.encode(resource)
+        } else if let resource = attributes as? Subscription {
+            try container.encode(resource)
+        } else if let resource = attributes as? SubscriptionItem {
+            try container.encode(resource)
+        } else if let resource = attributes as? LicenseKey {
+            try container.encode(resource)
+        } else if let resource = attributes as? LicenseKeyInstance {
+            try container.encode(resource)
+        } else if let resource = attributes as? Discount {
+            try container.encode(resource)
+        } else if let resource = attributes as? DiscountRedemption {
+            try container.encode(resource)
+        } else if let resource = attributes as? File {
+            try container.encode(resource)
+        } else if let resource = attributes as? Variant {
+            try container.encode(resource)
+        } else if let resource = attributes as? Webhook {
+            try container.encode(resource)
+        } else if let resource = attributes as? UsageRecord {
+            try container.encode(resource)
+        } else {
+            throw EncodingError.invalidValue(
+                attributes,
+                EncodingError.Context(codingPath: encoder.codingPath,
+                                      debugDescription: "Unable to encode resource.")
+            )
+        }
+    }
 }
 
 /// An object containing pagination information for paginated requests
