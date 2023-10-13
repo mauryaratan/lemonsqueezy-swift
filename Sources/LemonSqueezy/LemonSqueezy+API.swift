@@ -39,7 +39,7 @@ extension LemonSqueezy {
 
         var components = URLComponents()
         components.scheme = "https"
-        components.host = "api.lemonsqueezy.com"
+        components.host = self.baseHost
         components.path = "\(route.resolvedPath.path)"
         components.queryItems = combinedQueryItems
 
