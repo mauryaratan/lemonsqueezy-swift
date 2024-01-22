@@ -18,7 +18,7 @@ public struct ActivateLicense: Codable {
         public let id: Int
         public let status: String
         public let key: String
-        public let activationLimit: Int
+        public let activationLimit: Int?
         public let activationUsage: Int
         public let createdAt: String
         public let expiresAt: String?
@@ -56,7 +56,7 @@ public struct ValidateLicense: Codable {
         public let id: Int
         public let status: String
         public let key: String
-        public let activationLimit: Int
+        public let activationLimit: Int?
         public let activationUsage: Int
         public let createdAt: String
         public let expiresAt: String?
@@ -93,7 +93,7 @@ public struct DeactivateLicense: Codable {
         public let id: Int
         public let status: String
         public let key: String
-        public let activationLimit: Int
+        public let activationLimit: Int?
         public let activationUsage: Int
         public let createdAt: String
         public let expiresAt: String?
